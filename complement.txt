@@ -1,0 +1,35 @@
+Find 2’s complement of an 8-bit number and a 16-bit
+
+# ORG 7000H
+
+LXI H,7500
+MOV A,M
+CMA
+INR A
+INX H
+MOV M,A
+HLT
+
+# ORG 7500
+# DB 03
+
+
+# ORG 7000H
+
+LXI H,7500H
+MVI B,00
+MOV A,M
+CMA 
+ADI 01
+STA 7502
+JNC LOOP
+INR B
+LOOP: LXI H,7501
+MOV A,M
+CMA
+ADD B
+STA 7503
+HLT
+
+# ORG 7500
+# DB 00,4F

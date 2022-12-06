@@ -1,0 +1,44 @@
+Multiply two numbers by repetitive addition method.
+
+# ORG 7000H
+
+LXI H,7500
+MOV E,M
+MVI D,00
+INX H
+MOV A,M
+LXI H,0000
+CPI 00
+JZ Disp
+LOOP: DAD D
+DCR A
+JNZ LOOP
+
+Disp: SHLD 7502
+
+# ORG 7500
+# DB 02, 03
+
+Divide two numbers by repetitive subtraction method.
+
+# ORG 7000H
+
+LXI H,7500
+MOV A,M
+INX H
+MOV B,M
+MVI C,00
+Loop: CMP B
+JC Disp
+SUB B
+INR C
+JMP Loop
+
+Disp: INX H
+MOV M,A
+INX H
+MOV M,C
+HLT
+
+# ORG 7500
+# DB 26, 06

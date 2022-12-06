@@ -1,0 +1,82 @@
+Add two 8-bit numbers.
+
+Without carry					
+
+# ORG 7000H
+
+LXI H,7500
+MOV A,M
+INX H
+MOV B,M
+ADD B
+INX H
+MOV M,A
+HLT
+
+# ORG 7500
+# DB 12, 13
+
+With carry
+
+# ORG 7000H
+
+LXI H,7500
+MOV A,M
+INX H
+MOV B,M
+ADD B
+MVI C,00
+JNC NOC
+INR C
+NOC: INX H
+MOV M,A
+INX H
+MOV M,C
+HLT
+
+# ORG 7500
+# DB 12, 13
+
+—----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+Add two 16-bit numbers.
+
+Without Carry
+
+# ORG 7000H
+
+LHLD 7500
+XCHG
+LHLD 7502
+DAD D
+SHLD 7504
+HLT
+
+# ORG 7500
+# DB 13,31,12,10
+
+
+# ORG 7000H
+
+LHLD 7500
+XCHG
+LHLD 7502
+DAD D
+MVI C,00
+JNC NOC
+INR C
+NOC: SHLD 7504
+MOV A,C
+STA 7506
+HLT
+
+# ORG 7500
+# DB 13, 31,12,10
+
+—----------------------------------------------------------------------------------------------------------------------------
+
+
+

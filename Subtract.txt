@@ -1,0 +1,39 @@
+Subtract two 8-bit numbers.				
+
+# ORG 7000H
+
+LXI H,7500
+MOV A,M
+INX H
+MOV B,M
+SUB B
+INX H
+MOV M,A
+HLT
+
+# ORG 7500
+# DB 13, 12
+
+Subtract two 16-bit numbers.
+
+#ORG 2000
+
+LHLD 2050
+XCHG
+LHLD 2052
+MOV A,E
+SUB L
+MOV L,A
+MOV A,D
+SBB H
+MOV H,A
+SHLD 2054
+HLT
+
+#ORG 2050
+#DB 19,6A,15,5C 
+
+—----------------------------------------------------------------------------------------------------------------------------
+
+
+

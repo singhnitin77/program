@@ -1,0 +1,17 @@
+# ORG 7000H
+LHLD  7501       // Get Multiplicand in H-L pair.     
+XCHG           // Exchange HL pair with DE pair   
+LDA 7503       // Get  2nd  no. in acc.     
+LXI H,0000       // Initial product in HL=00      
+MVI C,08       // Count=08 in reg .C      
+up:DAD H      // Shift partial product left by 1 bit   
+RAL        // Rotate multi. by 1 bit. Is multiplier = 1?    
+JNC down      // No, go to ahead       
+DAD D      // Product=Product + Multiplicand    
+down:DCR C      // Decrement Count       
+JNZ up      // Jump until C=0        
+SHLD  7504       // Store result        
+RST 1        // Terminate       
+              
+#ORG 7501H          // Store inputs at the address            
+# DB 25,00,05       // Get the numbers from successive locations
